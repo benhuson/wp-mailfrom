@@ -20,6 +20,7 @@ class WP_MailFrom {
 	function WP_MailFrom() {
 		add_action( 'admin_init', array( $this, 'wp_mailfrom_settings' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		
 		// Name and email filter
 		add_filter( 'wp_mail_from_name', array( $this, 'wp_mail_from_name' ), 1 );
@@ -28,6 +29,13 @@ class WP_MailFrom {
 		// Legacy support for old options - just in case someone used this directly!
 		add_filter( 'pre_option_site_mail_from_name', 'get_option_site_mail_from_name', 1 );
 		add_filter( 'pre_option_site_mail_from_email', 'get_option_site_mail_from_email', 1 );
+	}
+	
+	/**
+	 * Load Text Domain Language Support
+	 */
+	function load_textdomain() {
+		load_plugin_textdomain( 'wp-mailfrom', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 	
 	/**
@@ -62,7 +70,7 @@ class WP_MailFrom {
 	 * Admin Menu
 	 */
 	function admin_menu() {
-		add_options_page( __( 'WP Mail From Plugin', 'wp_mailfrom' ), __( 'Mail From', 'wp_mailfrom' ), 'manage_options', 'wp_mailfrom', array( $this, 'settings_page' ) );
+		add_options_page( __( 'WP Mail From Plugin', 'wp-mailfrom' ), __( 'Mail From', 'wp-mailfrom' ), 'manage_options', 'wp_mailfrom', array( $this, 'settings_page' ) );
 	}
 	
 	/**
@@ -72,13 +80,13 @@ class WP_MailFrom {
 		?>
 		<div class="wrap">
 			<div id="icon-options-general" class="icon32"><br></div>
-			<h2><?php _e( 'Mail From Settings', 'wp_mailfrom' ); ?></h2>
+			<h2><?php _e( 'Mail From Settings', 'wp-mailfrom' ); ?></h2>
 			<form action="options.php" method="post">
 				<?php
 				settings_fields( 'wp_mailfrom' );
 				do_settings_sections( 'wp_mailfrom' );
 				?>
-				<p class="submit"><input name="submit" type="submit" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></p>
+				<p class="submit"><input name="submit" type="submit" value="<?php esc_attr_e( 'Save Changes', 'wp-mailfrom' ); ?>" /></p>
 			</form>
 		</div>
 		<?php
@@ -96,14 +104,14 @@ class WP_MailFrom {
 		);
 		add_settings_field(
 			'wp_mailfrom_name',
-			__( 'From Name', 'wp_mailfrom' ),
+			__( 'From Name', 'wp-mailfrom' ),
 			array( $this, 'wp_mailfrom_name_field' ),
 			'wp_mailfrom',
 			'wp_mailfrom'
 		);
 		add_settings_field(
 			'wp_mailfrom_email',
-			__( 'From Email Address', 'wp_mailfrom' ),
+			__( 'From Email Address', 'wp-mailfrom' ),
 			array( $this, 'wp_mailfrom_email_field' ),
 			'wp_mailfrom',
 			'wp_mailfrom'
@@ -127,7 +135,7 @@ class WP_MailFrom {
 	 * Mail From Settings Section
 	 */
 	function wp_mailfrom_settings_section() {
-		echo '<p>' . __( 'If set, these 2 options will override the name and email address in the <strong>From:</strong> header on all sent emails.', 'wp_mailfrom' ) . '</p>';
+		echo '<p>' . __( 'If set, these 2 options will override the name and email address in the <strong>From:</strong> header on all sent emails.', 'wp-mailfrom' ) . '</p>';
 	}
 
 	/**
