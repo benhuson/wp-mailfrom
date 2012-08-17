@@ -1,5 +1,5 @@
-=== WP Mail From ===
-Contributors: husobj, Tristan Aston
+=== WP Mail From II ===
+Contributors: husobj
 Tags: mail from, from email, email from, from address, mail, email, smtp, from address, email address, from header
 Requires at least: 2.9
 Tested up to: 3.4.1
@@ -12,6 +12,8 @@ Allows you to configure the default email address and name used for emails sent 
 == Description ==
 
 This plugin allows you to set the email address and name used on email sent by WordPress by setting the *From:* header.
+
+It is an updated and fully re-worked version of the [WP Mail From](http://wordpress.org/extend/plugins/wp-mailfrom/) plugin by Tristan Aston and now works with the latest versions of WordPress.
 
 * Adds a "Mail From" section in the "Settings" menu.
 * The plugin uses the filter hooks `wp_mail_from` and `wp_mail_from_name`.
