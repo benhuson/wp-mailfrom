@@ -23,8 +23,30 @@ It is an updated and fully re-worked version of the [WP Mail From](http://wordpr
 
 Either install via the WordPress admin plugin installer or...
 
-1. Unzip `wp-mailfrom.zip` in the `/wp-content/plugins/` directory.
+1. Unzip `wp-mailfrom-ii.zip` in the `/wp-content/plugins/` directory, making sure the folder is called `wp-mailfrom-ii`.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
+1. Visit the admin settings page `Settings > Mail From` and save your preferred name and email address.
+
+= Upgrading from the old WP Mail From plugin =
+
+This version is pretty much a complete re-write, fixes loads of bugs and works with the most recent versions of WordPress.
+
+If upgrading from the [WP Mail From](http://wordpress.org/extend/plugins/wp-mailfrom/) plugin your current name an email settings should be copied across but please check.
+To upgrade simply activate this plugin then deactivate the old WP Mail From plugin.
+
+Option naming conventions have changed in this version of the plugin.
+If you accessed either of the options directly for any reason you will need to re-factor you code as support for the old options will be removed in a future version.
+
+The old options could be retrieved as follows:
+
+`get_option( 'site_mail_from_name' );
+get_option( 'site_mail_from_email' );`
+
+You should now use:
+
+`get_option( 'wp_mailfrom_name' );
+get_option( 'wp_mailfrom_email' );`
+
 
 == Frequently Asked Questions ==
 
@@ -39,36 +61,12 @@ Possibly your mail server has added a *Sender:* header or is configured to alway
 == Changelog ==
 
 = 1.0 =
-* Pretty much re-coded from scratch - now based around a core WP_MailFrom class.
+* Pretty much re-coded from scratch - now based around a core WP_MailFrom_II class.
 * Uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API).
-* Stores name and email as `wp_mailfrom_name` and `wp_mailfrom_email` options. Legacy support provided for old options.
-
-= 0.6 =
-* readme.txt changed to reflect compatibility with recent versions of WordPress.
+* Stores name and email as `wp_mailfrom_ii_name` and `wp_mailfrom_ii_email` options. Upgrade support provided for old options.
 
 == Upgrade Notice ==
 
 = 1.0 =
 This version is pretty much a complete re-write, fixes loads of bugs and works with the most recent versions of WordPress.
-
-= 0.6 = 
-This version just updates compatibility information.
-
-== Theme/Plugin Authors ==
-
-= 1.0 =
-This version is pretty much a complete re-write.
-If you have been using a previous version of this plugin it should just work.
-
-However, for naming consistency, the option names have changed.
-If you accessed either of the options directly for any reason you will need to re-factor you code as support for the old options will be removed in a future version.
-
-The old options could be retrieved as follows:
-
-`get_option( 'site_mail_from_name' );
-get_option( 'site_mail_from_email' );`
-
-You should now use:
-
-`get_option( 'wp_mailfrom_name' );
-get_option( 'wp_mailfrom_email' );`
+If upgrading from the [WP Mail From](http://wordpress.org/extend/plugins/wp-mailfrom/) plugin your current name an email settings should be copied across but please check.
