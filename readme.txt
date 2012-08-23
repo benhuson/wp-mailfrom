@@ -1,5 +1,6 @@
 === WP Mail From II ===
 Contributors: husobj
+Donate link: http://www.benhuson.co.uk/donate/
 Tags: mail from, from email, email from, from address, mail, email, smtp, from address, email address, from header
 Requires at least: 2.9
 Tested up to: 3.4.1
@@ -18,6 +19,8 @@ It is an updated and fully re-worked version of the [WP Mail From](http://wordpr
 * Adds a "Mail From" section in the "Settings" menu.
 * The plugin uses the filter hooks `wp_mail_from` and `wp_mail_from_name`.
 * The priority for the hooks is set to 1 to allow for other plugins that may hook these with the default priority of 10 to override this plugin.
+
+Danish translation by Frederik Svarre ([www.fslab.dk](http://www.fslab.dk/))
 
 == Installation ==
 
