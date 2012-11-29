@@ -3,8 +3,8 @@ Contributors: husobj
 Donate link: http://www.benhuson.co.uk/donate/
 Tags: mail from, from email, email from, from address, mail, email, smtp, from address, email address, from header
 Requires at least: 2.9
-Tested up to: 3.4.1
-Stable tag: 1.0
+Tested up to: 3.5
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,9 @@ Possibly your mail server has added a *Sender:* header or is configured to alway
 1. The settings page
 
 == Changelog ==
+
+= 1.0.1 =
+* Correctly style save settings button.
 
 = 1.0 =
 * Pretty much re-coded from scratch - now based around a core WP_MailFrom_II class.
