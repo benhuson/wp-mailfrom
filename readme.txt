@@ -57,6 +57,10 @@ get_option( 'wp_mailfrom_email' );`
 
 Possibly your mail server has added a *Sender:* header or is configured to always set the *envelope sender* to the user calling it.
 
+= Why are emails not being sent? =
+
+Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wordpress.org/ticket/5007](http://trac.wordpress.org/ticket/5007) for more details.
+
 == Screenshots ==
 
 1. The settings page

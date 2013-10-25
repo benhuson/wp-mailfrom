@@ -50,7 +50,7 @@ class WP_MailFrom_II {
 	 */
 	function wp_mail_from_name( $name ) {
 		$wp_mailfrom_ii_name = get_option( 'wp_mailfrom_ii_name', '' );
-		if ( ! empty( $wp_mailfrom_ii_name ) ) {
+		if ( ! empty( $wp_mailfrom_ii_name ) && ! $this->is_default_from_name( $wp_mailfrom_ii_name ) ) {
 			return $wp_mailfrom_ii_name;
 		}
 		return $name;
@@ -64,12 +64,53 @@ class WP_MailFrom_II {
 	 */
 	function wp_mail_from( $email ) {
 		$wp_mailfrom_ii_email = get_option( 'wp_mailfrom_ii_email', '' );
-		if ( ! empty( $wp_mailfrom_ii_email ) ) {
+		if ( ! empty( $wp_mailfrom_ii_email ) && ! $this->is_default_from( $wp_mailfrom_ii_email ) ) {
 			return $wp_mailfrom_ii_email;
 		}
 		return $email;
 	}
-	
+
+	/**
+	 * Is Default From Name
+	 *
+	 * Checks to see if the name is the default name assigned by WordPress.
+	 * This is defined in wp_mail() in wp-includes/pluggable.php
+	 *
+	 * @param   string   $name  Name to check.
+	 * @return  boolean
+	 */
+	function is_default_from_name( $name ) {
+		if ( $name == 'WordPress' )
+			return true;
+		return false;
+	}
+
+	/**
+	 * Is Default From Email
+	 *
+	 * Checks to see if the email is the default address assigned by WordPress.
+	 * This is defined in wp_mail() in wp-includes/pluggable.php
+	 *
+	 * Also note, some hosts may refuse to relay mail from an unknown domain. See
+	 * http://trac.wordpress.org/ticket/5007
+	 *
+	 * @param   string   $email  Email to check.
+	 * @return  boolean
+	 */
+	function is_default_from( $email ) {
+
+		// Get the default from email address
+		$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+		if ( substr( $sitename, 0, 4 ) == 'www.' ) {
+			$sitename = substr( $sitename, 4 );
+		}
+		$default_email = 'wordpress@' . $sitename;
+
+		if ( $email == $default_email )
+			return true;
+		return false;
+	}
+
 	/**
 	 * Admin Menu
 	 */
