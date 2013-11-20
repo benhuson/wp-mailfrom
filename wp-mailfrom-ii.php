@@ -39,7 +39,7 @@ class WP_MailFrom_II {
 	 * Load Text Domain Language Support
 	 */
 	function load_textdomain() {
-		load_plugin_textdomain( 'wp-mailfrom-ii', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+		load_plugin_textdomain( 'wp-mailfrom-ii', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 	
 	/**
