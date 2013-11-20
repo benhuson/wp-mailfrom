@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: WP Mail From II
-Version: 1.0.1
+Version: 1.0.2
 Plugin URI: http://wordpress.org/extend/plugins/wp-mailfrom-ii/
 Description: Allows you to configure the default email address and name used for emails sent by WordPress.
 Author: Ben Huson

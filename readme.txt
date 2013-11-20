@@ -3,8 +3,8 @@ Contributors: husobj
 Donate link: http://www.benhuson.co.uk/donate/
 Tags: mail from, from email, email from, from address, mail, email, smtp, from address, email address, from header
 Requires at least: 2.9
-Tested up to: 3.5
-Stable tag: 1.0.1
+Tested up to: 3.7.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,6 +66,9 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 1. The settings page
 
 == Changelog ==
+
+= 1.0.2 =
+* Only set email address and name if overwriting the default WordPress values.
 
 = 1.0.1 =
 * Correctly style save settings button.
