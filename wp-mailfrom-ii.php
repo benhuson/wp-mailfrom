@@ -27,9 +27,40 @@ if ( ! defined( 'WPINC' ) ) {
 class WP_MailFrom_II {
 
 	/**
+	 * Plugin version, used for cache-busting of style and script file references.
+	 *
+	 * @since  1.1
+	 *
+	 * @var    string
+	 */
+	const VERSION = '1.1';
+
+	/**
+	 * Unique identifier for your plugin.
+	 *
+	 * The variable name is used as the text domain when internationalizing strings
+	 * of text. Its value should match the Text Domain file header in the main
+	 * plugin file.
+	 *
+	 * @since  1.1
+	 *
+	 * @var    string
+	 */
+	protected $plugin_slug = 'wp-mailfrom-ii';
+
+	/**
+	 * Instance of this class.
+	 *
+	 * @since  1.1
+	 *
+	 * @var    object
+	 */
+	protected static $instance = null;
+
+	/**
 	 * Constructor
 	 */
-	function WP_MailFrom_II() {
+	private function __construct() {
 		add_action( 'admin_init', array( $this, 'settings' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
@@ -45,9 +76,26 @@ class WP_MailFrom_II {
 	}
 	
 	/**
+	 * Return an instance of this class.
+	 *
+	 * @since   1.1
+	 *
+	 * @return  object  A single instance of this class.
+	 */
+	public static function get_instance() {
+
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+	}
+
+	/**
 	 * Load Text Domain Language Support
 	 */
-	function load_textdomain() {
+	public function load_textdomain() {
 		load_plugin_textdomain( 'wp-mailfrom-ii', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 	
@@ -57,7 +105,7 @@ class WP_MailFrom_II {
 	 * @param string $name Default name.
 	 * @return string $name WP Mail From name.
 	 */
-	function wp_mail_from_name( $name ) {
+	public function wp_mail_from_name( $name ) {
 		$wp_mailfrom_ii_name = get_option( 'wp_mailfrom_ii_name', '' );
 		if ( ! empty( $wp_mailfrom_ii_name ) && ! $this->is_default_from_name( $wp_mailfrom_ii_name ) ) {
 			return $wp_mailfrom_ii_name;
@@ -71,7 +119,7 @@ class WP_MailFrom_II {
 	 * @param string $name Default email.
 	 * @return string $name WP Mail From email.
 	 */
-	function wp_mail_from( $email ) {
+	public function wp_mail_from( $email ) {
 		$wp_mailfrom_ii_email = get_option( 'wp_mailfrom_ii_email', '' );
 		if ( ! empty( $wp_mailfrom_ii_email ) && ! $this->is_default_from( $wp_mailfrom_ii_email ) && ! $this->is_admin_from( $wp_mailfrom_ii_email ) ) {
 			return $wp_mailfrom_ii_email;
@@ -88,7 +136,7 @@ class WP_MailFrom_II {
 	 * @param   string   $name  Name to check.
 	 * @return  boolean
 	 */
-	function is_default_from_name( $name ) {
+	public function is_default_from_name( $name ) {
 		if ( $name == 'WordPress' )
 			return true;
 		return false;
@@ -106,7 +154,7 @@ class WP_MailFrom_II {
 	 * @param   string   $email  Email to check.
 	 * @return  boolean
 	 */
-	function is_default_from( $email ) {
+	public function is_default_from( $email ) {
 
 		// Get the default from email address
 		$sitename = strtolower( $_SERVER['SERVER_NAME'] );
@@ -131,7 +179,7 @@ class WP_MailFrom_II {
 	 * @param   string   $email  Email to check.
 	 * @return  boolean
 	 */
-	function is_admin_from( $email ) {
+	public function is_admin_from( $email ) {
 		if ( $email == $admin_email )
 			return true;
 		return false;
@@ -140,14 +188,14 @@ class WP_MailFrom_II {
 	/**
 	 * Admin Menu
 	 */
-	function admin_menu() {
+	public function admin_menu() {
 		add_options_page( __( 'WP Mail From Plugin', 'wp-mailfrom-ii' ), __( 'Mail From', 'wp-mailfrom-ii' ), 'manage_options', 'wp_mailfrom', array( $this, 'settings_page' ) );
 	}
 	
 	/**
 	 * Settings Page
 	 */
-	function settings_page() {
+	public function settings_page() {
 		?>
 		<div class="wrap">
 			<div id="icon-options-general" class="icon32"><br></div>
@@ -166,7 +214,7 @@ class WP_MailFrom_II {
 	/**
 	 * Settings API
 	 */
-	function settings() {
+	public function settings() {
 		add_settings_section(
 			'wp_mailfrom_ii',
 			'',
@@ -198,42 +246,42 @@ class WP_MailFrom_II {
 	 * @param string $val Name.
 	 * @return string Sanitized name.
 	 */
-	function sanitize_wp_mailfrom_ii_name( $val ) {
+	public function sanitize_wp_mailfrom_ii_name( $val ) {
 		return wp_kses( $val, array() );
 	}
 
 	/**
 	 * Mail From Settings Section
 	 */
-	function settings_section() {
+	public function settings_section() {
 		echo '<p>' . __( 'If set, these 2 options will override the name and email address in the <strong>From:</strong> header on all sent emails.', 'wp-mailfrom-ii' ) . '</p>';
 	}
 
 	/**
 	 * Mail From Name Field
 	 */
-	function wp_mailfrom_ii_name_field() {
+	public function wp_mailfrom_ii_name_field() {
 		echo '<input name="wp_mailfrom_ii_name" type="text" id="wp_mailfrom_ii_name" value="' . get_option( 'wp_mailfrom_ii_name', '' ) . '" class="regular-text" />';
 	}
 
 	/**
 	 * Mail From Email Field
 	 */
-	function wp_mailfrom_ii_email_field() {
+	public function wp_mailfrom_ii_email_field() {
 		echo '<input name="wp_mailfrom_ii_email" type="text" id="wp_mailfrom_ii_email" value="' . get_option( 'wp_mailfrom_ii_email', '' ) . '" class="regular-text" />';
 	}
 	
 	/**
 	 * Legacy support for get_option( 'site_mail_from_name' )
 	 */
-	function get_option_site_mail_from_name( $option, $default = false ) {
+	public function get_option_site_mail_from_name( $option, $default = false ) {
 		return get_option( 'wp_mailfrom_ii_name', $default );
 	}
 	
 	/**
 	 * Legacy support for get_option( 'site_mail_from_email' )
 	 */
-	function get_option_site_mail_from_email( $option, $default = false ) {
+	public function get_option_site_mail_from_email( $option, $default = false ) {
 		return get_option( 'wp_mailfrom_ii_email', $default );
 	}
 	
@@ -241,7 +289,7 @@ class WP_MailFrom_II {
 	 * Register Activation
 	 * Perform upgrades etc.
 	 */
-	function register_activation() {
+	public static function activate() {
 		
 		// Temporarily remove our filter which provide support for legacy options
 		// (is only really needed if we can takeover the old plugin, but leave in for now)
@@ -270,6 +318,12 @@ class WP_MailFrom_II {
 	
 }
 
-global $WP_MailFrom_II;
-$WP_MailFrom_II = new WP_MailFrom_II();
-register_activation_hook( __FILE__, array( $WP_MailFrom_II, 'register_activation' ) );
+/**
+ * Init.
+ */
+add_action( 'plugins_loaded', array( 'WP_MailFrom_II', 'get_instance' ) );
+
+/**
+ * Register hooks that are fired when the plugin is activated or deactivated.
+ */
+register_activation_hook( __FILE__, array( 'WP_MailFrom_II', 'activate' ) );
