@@ -64,7 +64,7 @@ class WP_MailFrom_II {
 	 */
 	function wp_mail_from( $email ) {
 		$wp_mailfrom_ii_email = get_option( 'wp_mailfrom_ii_email', '' );
-		if ( ! empty( $wp_mailfrom_ii_email ) && ! $this->is_default_from( $wp_mailfrom_ii_email ) ) {
+		if ( ! empty( $wp_mailfrom_ii_email ) && ! $this->is_default_from( $wp_mailfrom_ii_email ) && ! $this->is_admin_from( $wp_mailfrom_ii_email ) ) {
 			return $wp_mailfrom_ii_email;
 		}
 		return $email;
@@ -107,6 +107,23 @@ class WP_MailFrom_II {
 		$default_email = 'wordpress@' . $sitename;
 
 		if ( $email == $default_email )
+			return true;
+		return false;
+	}
+
+	/**
+	 * Is Admin From Email
+	 *
+	 * Checks to see if the email is the admin email address set in the WordPress options.
+	 *
+	 * Also note, some hosts may refuse to relay mail from an unknown domain. See
+	 * http://trac.wordpress.org/ticket/5007
+	 *
+	 * @param   string   $email  Email to check.
+	 * @return  boolean
+	 */
+	function is_admin_from( $email ) {
+		if ( $email == $admin_email )
 			return true;
 		return false;
 	}
