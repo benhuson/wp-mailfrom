@@ -19,6 +19,11 @@ An updated and fully re-worked version of the WP Mail From plugin by Tristan Ast
 http://wordpress.org/extend/plugins/wp-mailfrom/
 */
 
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 class WP_MailFrom_II {
 
 	/**
