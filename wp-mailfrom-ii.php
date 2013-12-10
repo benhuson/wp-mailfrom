@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 class WP_MailFrom_II {
 
 	/**
-	 * Plugin version, used for cache-busting of style and script file references.
+	 * Plugin version, used for cache-busting of style and script file references and db upgrades.
 	 *
 	 * @since  1.1
 	 *
@@ -63,7 +63,7 @@ class WP_MailFrom_II {
 	private function __construct() {
 		add_action( 'admin_init', array( $this, 'settings' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
 		
 		// Name and email filter
 		add_filter( 'wp_mail_from_name', array( $this, 'wp_mail_from_name' ), 100 );
@@ -93,10 +93,21 @@ class WP_MailFrom_II {
 	}
 
 	/**
+	 * Return the plugin slug.
+	 *
+	 * @since   1.1
+	 *
+	 * @return  Plugin slug variable.
+	 */
+	public function get_plugin_slug() {
+		return $this->plugin_slug;
+	}
+
+	/**
 	 * Load Text Domain Language Support
 	 */
-	public function load_textdomain() {
-		load_plugin_textdomain( 'wp-mailfrom-ii', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	public function load_plugin_textdomain() {
+		load_plugin_textdomain( $this->plugin_slug, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 	
 	/**
@@ -189,7 +200,7 @@ class WP_MailFrom_II {
 	 * Admin Menu
 	 */
 	public function admin_menu() {
-		add_options_page( __( 'WP Mail From Plugin', 'wp-mailfrom-ii' ), __( 'Mail From', 'wp-mailfrom-ii' ), 'manage_options', 'wp_mailfrom', array( $this, 'settings_page' ) );
+		add_options_page( __( 'WP Mail From Plugin', $this->plugin_slug ), __( 'Mail From', $this->plugin_slug ), 'manage_options', 'wp_mailfrom', array( $this, 'settings_page' ) );
 	}
 	
 	/**
@@ -199,13 +210,13 @@ class WP_MailFrom_II {
 		?>
 		<div class="wrap">
 			<div id="icon-options-general" class="icon32"><br></div>
-			<h2><?php _e( 'Mail From Settings', 'wp-mailfrom-ii' ); ?></h2>
+			<h2><?php _e( 'Mail From Settings', $this->plugin_slug ); ?></h2>
 			<form action="options.php" method="post">
 				<?php
 				settings_fields( 'wp_mailfrom_ii' );
 				do_settings_sections( 'wp_mailfrom_ii' );
 				?>
-				<p class="submit"><input name="submit" type="submit" class="button button-primary" value="<?php esc_attr_e( 'Save Changes', 'wp-mailfrom-ii' ); ?>" /></p>
+				<p class="submit"><input name="submit" type="submit" class="button button-primary" value="<?php esc_attr_e( 'Save Changes', $this->plugin_slug ); ?>" /></p>
 			</form>
 		</div>
 		<?php
@@ -223,14 +234,14 @@ class WP_MailFrom_II {
 		);
 		add_settings_field(
 			'wp_mailfrom_ii_name',
-			__( 'From Name', 'wp-mailfrom-ii' ),
+			__( 'From Name', $this->plugin_slug ),
 			array( $this, 'wp_mailfrom_ii_name_field' ),
 			'wp_mailfrom_ii',
 			'wp_mailfrom_ii'
 		);
 		add_settings_field(
 			'wp_mailfrom_ii_email',
-			__( 'From Email Address', 'wp-mailfrom-ii' ),
+			__( 'From Email Address', $this->plugin_slug ),
 			array( $this, 'wp_mailfrom_ii_email_field' ),
 			'wp_mailfrom_ii',
 			'wp_mailfrom_ii'
@@ -254,7 +265,7 @@ class WP_MailFrom_II {
 	 * Mail From Settings Section
 	 */
 	public function settings_section() {
-		echo '<p>' . __( 'If set, these 2 options will override the name and email address in the <strong>From:</strong> header on all sent emails.', 'wp-mailfrom-ii' ) . '</p>';
+		echo '<p>' . __( 'If set, these 2 options will override the name and email address in the <strong>From:</strong> header on all sent emails.', $this->plugin_slug ) . '</p>';
 	}
 
 	/**
