@@ -45,8 +45,9 @@ class WP_MailFrom_II_Admin {
 		add_action( 'admin_init', array( $this, 'settings' ) );
 
 		// Add an action link pointing to the settings page.
-		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
-		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
+		$this->plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
+		add_filter( 'plugin_action_links_' . $this->plugin_basename, array( $this, 'add_action_links' ) );
+		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 4 );
 	}
 
 	/**
@@ -175,6 +176,25 @@ class WP_MailFrom_II_Admin {
 			),
 			$links
 		);
+	}
+
+	/**
+	 * Plugin Row Meta
+	 *
+	 * Adds documentation, support and issue links below the plugin description on the plugins page.
+	 *
+	 * @param   array   $plugin_meta  Plugin meta display array.
+	 * @param   string  $plugin_file  Plugin reference.
+	 * @param   array   $plugin_data  Plugin data.
+	 * @param   string  $status       Plugin status.
+	 * @return  array                 Plugin meta array.
+	 */
+	function plugin_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
+		if ( $this->plugin_basename == $plugin_file ) {
+			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', __( 'https://github.com/benhuson/wp-mailfrom', 'wp-geo' ), __( 'GitHub', 'wp-geo' ) );
+			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', __( 'http://wordpress.org/support/plugin/wp-mailfrom-ii', 'wp-geo' ), __( 'Support', 'wp-geo' ) );
+		}
+		return $plugin_meta;
 	}
 
 }
