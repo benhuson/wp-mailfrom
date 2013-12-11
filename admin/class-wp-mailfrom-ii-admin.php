@@ -141,7 +141,7 @@ class WP_MailFrom_II_Admin {
 	 * Mail From Settings Section
 	 */
 	public function settings_section() {
-		echo '<p>' . __( 'If set, these 2 options will override the name and email address in the <strong>From:</strong> header on all sent emails.', $this->plugin_slug ) . '</p>';
+		echo '<p>' . __( 'If set, these two options will override the default name and email address in the &quot;From&quot; header on emails sent by WordPress.', $this->plugin_slug ) . '</p>';
 	}
 
 	/**

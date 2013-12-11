@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-mailfrom-ii\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 12:00-0000\n"
-"PO-Revision-Date: 2013-12-11 12:00-0000\n"
+"POT-Creation-Date: 2013-12-11 12:49-0000\n"
+"PO-Revision-Date: 2013-12-11 12:49-0000\n"
 "Last-Translator: Ben Huson <ben@thewhiteroom.net>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -15,29 +15,29 @@ msgstr ""
 "X-Generator: Poedit 1.6.2\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-wp-mailfrom-ii-admin.php:83
+#: admin/class-wp-mailfrom-ii-admin.php:78
 msgid "WP Mail From Plugin"
 msgstr ""
 
-#: admin/class-wp-mailfrom-ii-admin.php:84
+#: admin/class-wp-mailfrom-ii-admin.php:79
 msgid "Mail From"
 msgstr ""
 
-#: admin/class-wp-mailfrom-ii-admin.php:113
+#: admin/class-wp-mailfrom-ii-admin.php:109
 msgid "From Name"
 msgstr ""
 
-#: admin/class-wp-mailfrom-ii-admin.php:120
+#: admin/class-wp-mailfrom-ii-admin.php:116
 msgid "From Email Address"
 msgstr ""
 
-#: admin/class-wp-mailfrom-ii-admin.php:144
+#: admin/class-wp-mailfrom-ii-admin.php:145
 msgid ""
-"If set, these 2 options will override the name and email address in the "
-"<strong>From:</strong> header on all sent emails."
+"If set, these two options will override the default name and email address "
+"in the &quot;From&quot; header on emails sent by WordPress."
 msgstr ""
 
-#: admin/class-wp-mailfrom-ii-admin.php:170
+#: admin/class-wp-mailfrom-ii-admin.php:174
 msgid "Settings"
 msgstr ""
 
