@@ -46,14 +46,10 @@ class WP_MailFrom_II {
 	 */
 	private function __construct() {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+
 		// Name and email filter
 		add_filter( 'wp_mail_from_name', array( $this, 'wp_mail_from_name' ), 100 );
 		add_filter( 'wp_mail_from', array( $this, 'wp_mail_from' ), 100 );
-		
-		// Legacy support for old options - just in case someone used this directly!
-		// (not really needed unless we can takeover the old plugin)
-		//add_filter( 'pre_option_site_mail_from_name', 'get_option_site_mail_from_name', 1 );
-		//add_filter( 'pre_option_site_mail_from_email', 'get_option_site_mail_from_email', 1 );
 	}
 
 	/**
@@ -191,24 +187,6 @@ class WP_MailFrom_II {
 	}
 
 	/**
-	 * Legacy support for get_option( 'site_mail_from_name' )
-	 *
-	 * @since  1.1
-	 */
-	public function get_option_site_mail_from_name( $option, $default = false ) {
-		return get_option( 'wp_mailfrom_ii_name', $default );
-	}
-
-	/**
-	 * Legacy support for get_option( 'site_mail_from_email' )
-	 *
-	 * @since  1.1
-	 */
-	public function get_option_site_mail_from_email( $option, $default = false ) {
-		return get_option( 'wp_mailfrom_ii_email', $default );
-	}
-
-	/**
 	 * Register Activation
 	 *
 	 * Called when plugin is activated. Not called when plugin is auto-updated.
@@ -217,12 +195,8 @@ class WP_MailFrom_II {
 	 */
 	public static function activate() {
 
-		// Temporarily remove our filter which provide support for legacy options
-		// (is only really needed if we can takeover the old plugin, but leave in for now)
-		remove_filter( 'pre_option_site_mail_from_name', 'get_option_site_mail_from_name', 1 );
-		remove_filter( 'pre_option_site_mail_from_email', 'get_option_site_mail_from_email', 1 );
-
-		// Get old option value and try to assign them to new options
+		// Copy values from original WP MailFrom if present and plugin optionsnot yet set.
+		// http://wordpress.org/plugins/wp-mailfrom/
 		$name = get_option( 'site_mail_from_name', '' );
 		$email = get_option( 'site_mail_from_email', '' );
 		$new_name = get_option( 'wp_mailfrom_ii_name', '' );
@@ -231,15 +205,6 @@ class WP_MailFrom_II {
 			$name_updated = add_option( 'wp_mailfrom_ii_name', $name );
 		if ( ! empty( $email ) && empty( $new_email ) )
 			$email_updated = add_option( 'wp_mailfrom_ii_email', $email );
-
-		// If new options created delete old options
-		// (don't do this at the moment, only if we can takeover the old plugin)
-		/*
-		if ( $name_updated )
-			delete_option( 'site_mail_from_name' );
-		if ( $email_updated )
-			delete_option( 'site_mail_from_email' );
-		*/
 	}
 
 }
