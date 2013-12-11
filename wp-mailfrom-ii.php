@@ -61,8 +61,6 @@ class WP_MailFrom_II {
 	 * Constructor
 	 */
 	private function __construct() {
-		add_action( 'admin_init', array( $this, 'settings' ) );
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
 		
 		// Name and email filter
@@ -195,92 +193,6 @@ class WP_MailFrom_II {
 			return true;
 		return false;
 	}
-
-	/**
-	 * Admin Menu
-	 */
-	public function admin_menu() {
-		add_options_page( __( 'WP Mail From Plugin', $this->plugin_slug ), __( 'Mail From', $this->plugin_slug ), 'manage_options', 'wp_mailfrom', array( $this, 'settings_page' ) );
-	}
-	
-	/**
-	 * Settings Page
-	 */
-	public function settings_page() {
-		?>
-		<div class="wrap">
-			<div id="icon-options-general" class="icon32"><br></div>
-			<h2><?php _e( 'Mail From Settings', $this->plugin_slug ); ?></h2>
-			<form action="options.php" method="post">
-				<?php
-				settings_fields( 'wp_mailfrom_ii' );
-				do_settings_sections( 'wp_mailfrom_ii' );
-				?>
-				<p class="submit"><input name="submit" type="submit" class="button button-primary" value="<?php esc_attr_e( 'Save Changes', $this->plugin_slug ); ?>" /></p>
-			</form>
-		</div>
-		<?php
-	}
-	
-	/**
-	 * Settings API
-	 */
-	public function settings() {
-		add_settings_section(
-			'wp_mailfrom_ii',
-			'',
-			array( $this, 'settings_section' ),
-			'wp_mailfrom_ii'
-		);
-		add_settings_field(
-			'wp_mailfrom_ii_name',
-			__( 'From Name', $this->plugin_slug ),
-			array( $this, 'wp_mailfrom_ii_name_field' ),
-			'wp_mailfrom_ii',
-			'wp_mailfrom_ii'
-		);
-		add_settings_field(
-			'wp_mailfrom_ii_email',
-			__( 'From Email Address', $this->plugin_slug ),
-			array( $this, 'wp_mailfrom_ii_email_field' ),
-			'wp_mailfrom_ii',
-			'wp_mailfrom_ii'
-		);
- 		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_name', array( $this, 'sanitize_wp_mailfrom_ii_name' ) );
- 		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_email', 'is_email' );
-	}
-
-	/**
-	 * Sanitize Mail From Name
-	 * Strips out all HTML, scripts...
-	 *
-	 * @param string $val Name.
-	 * @return string Sanitized name.
-	 */
-	public function sanitize_wp_mailfrom_ii_name( $val ) {
-		return wp_kses( $val, array() );
-	}
-
-	/**
-	 * Mail From Settings Section
-	 */
-	public function settings_section() {
-		echo '<p>' . __( 'If set, these 2 options will override the name and email address in the <strong>From:</strong> header on all sent emails.', $this->plugin_slug ) . '</p>';
-	}
-
-	/**
-	 * Mail From Name Field
-	 */
-	public function wp_mailfrom_ii_name_field() {
-		echo '<input name="wp_mailfrom_ii_name" type="text" id="wp_mailfrom_ii_name" value="' . get_option( 'wp_mailfrom_ii_name', '' ) . '" class="regular-text" />';
-	}
-
-	/**
-	 * Mail From Email Field
-	 */
-	public function wp_mailfrom_ii_email_field() {
-		echo '<input name="wp_mailfrom_ii_email" type="text" id="wp_mailfrom_ii_email" value="' . get_option( 'wp_mailfrom_ii_email', '' ) . '" class="regular-text" />';
-	}
 	
 	/**
 	 * Legacy support for get_option( 'site_mail_from_name' )
@@ -330,11 +242,21 @@ class WP_MailFrom_II {
 }
 
 /**
+ * Register hooks that are fired when the plugin is activated.
+ */
+register_activation_hook( __FILE__, array( 'WP_MailFrom_II', 'activate' ) );
+
+/**
  * Init.
  */
 add_action( 'plugins_loaded', array( 'WP_MailFrom_II', 'get_instance' ) );
 
 /**
- * Register hooks that are fired when the plugin is activated or deactivated.
+ * Only load admin functionality in admin.
  */
-register_activation_hook( __FILE__, array( 'WP_MailFrom_II', 'activate' ) );
+if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
+
+	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-wp-mailfrom-ii-admin.php' );
+	add_action( 'plugins_loaded', array( 'WP_MailFrom_II_Admin', 'get_instance' ) );
+
+}
