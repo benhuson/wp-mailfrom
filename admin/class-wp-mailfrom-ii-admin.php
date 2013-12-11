@@ -11,9 +11,9 @@ class WP_MailFrom_II_Admin {
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    1.1
+	 * @since  1.1
 	 *
-	 * @var      object
+	 * @var    object
 	 */
 	protected static $instance = null;
 
@@ -30,13 +30,11 @@ class WP_MailFrom_II_Admin {
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
 	 *
-	 * @since     1.1
+	 * @since  1.1
 	 */
 	private function __construct() {
 
-		/**
-		 * Call $plugin_slug from public plugin class.
-		 */
+		// Get plugin slug
 		$plugin = WP_MailFrom_II::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
@@ -46,10 +44,9 @@ class WP_MailFrom_II_Admin {
 		// Register settings fields
 		add_action( 'admin_init', array( $this, 'settings' ) );
 
-		// Add an action link pointing to the options page.
+		// Add an action link pointing to the settings page.
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
-
 	}
 
 	/**
@@ -70,15 +67,13 @@ class WP_MailFrom_II_Admin {
 	}
 
 	/**
-	 * Register the administration menu.
+	 * Register administration menus.
 	 *
 	 * @since  1.1
 	 */
 	public function add_plugin_admin_menu() {
 
-		/*
-		 * Add a settings page to the Settings menu.
-		 */
+		// Add a settings page to the Settings menu
 		$this->plugin_screen_hook_suffix = add_options_page(
 			__( 'WP Mail From Plugin', $this->plugin_slug ),
 			__( 'Mail From', $this->plugin_slug ),
@@ -86,7 +81,6 @@ class WP_MailFrom_II_Admin {
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
 		);
-
 	}
 
 	/**
@@ -97,9 +91,11 @@ class WP_MailFrom_II_Admin {
 	public function display_plugin_admin_page() {
 		include_once( 'views/admin.php' );
 	}
-	
+
 	/**
-	 * Settings API
+	 * Settings API.
+	 *
+	 * @since  1.1
 	 */
 	public function settings() {
 		add_settings_section(
@@ -122,37 +118,46 @@ class WP_MailFrom_II_Admin {
 			'wp_mailfrom_ii',
 			'wp_mailfrom_ii'
 		);
- 		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_name', array( $this, 'sanitize_wp_mailfrom_ii_name' ) );
- 		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_email', 'is_email' );
+		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_name', array( $this, 'sanitize_wp_mailfrom_ii_name' ) );
+		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_email', 'is_email' );
 	}
 
 	/**
-	 * Sanitize Mail From Name
-	 * Strips out all HTML, scripts...
+	 * Sanitize Mail From Name.
 	 *
-	 * @param string $val Name.
-	 * @return string Sanitized name.
+	 * Strips out all HTML, scripts, etc...
+	 *
+	 * @since  1.1
+	 *
+	 * @param   string  $val  Name.
+	 * @return  string        Sanitized name.
 	 */
 	public function sanitize_wp_mailfrom_ii_name( $val ) {
 		return wp_kses( $val, array() );
 	}
 
 	/**
-	 * Mail From Settings Section
+	 * Mail From Settings Section.
+	 *
+	 * @since  1.1
 	 */
 	public function settings_section() {
 		echo '<p>' . __( 'If set, these two options will override the default name and email address in the &quot;From&quot; header on emails sent by WordPress.', $this->plugin_slug ) . '</p>';
 	}
 
 	/**
-	 * Mail From Name Field
+	 * Mail From Name Field.
+	 *
+	 * @since  1.1
 	 */
 	public function wp_mailfrom_ii_name_field() {
 		echo '<input name="wp_mailfrom_ii_name" type="text" id="wp_mailfrom_ii_name" value="' . get_option( 'wp_mailfrom_ii_name', '' ) . '" class="regular-text" />';
 	}
 
 	/**
-	 * Mail From Email Field
+	 * Mail From Email Field.
+	 *
+	 * @since  1.1
 	 */
 	public function wp_mailfrom_ii_email_field() {
 		echo '<input name="wp_mailfrom_ii_email" type="text" id="wp_mailfrom_ii_email" value="' . get_option( 'wp_mailfrom_ii_email', '' ) . '" class="regular-text" />';
@@ -164,14 +169,12 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function add_action_links( $links ) {
-
 		return array_merge(
 			array(
 				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . __( 'Settings', $this->plugin_slug ) . '</a>'
 			),
 			$links
 		);
-
 	}
 
 }

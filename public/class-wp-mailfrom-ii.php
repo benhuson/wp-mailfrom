@@ -41,6 +41,8 @@ class WP_MailFrom_II {
 
 	/**
 	 * Constructor
+	 *
+	 * @since  1.1
 	 */
 	private function __construct() {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
@@ -53,7 +55,7 @@ class WP_MailFrom_II {
 		//add_filter( 'pre_option_site_mail_from_name', 'get_option_site_mail_from_name', 1 );
 		//add_filter( 'pre_option_site_mail_from_email', 'get_option_site_mail_from_email', 1 );
 	}
-	
+
 	/**
 	 * Return an instance of this class.
 	 *
@@ -84,17 +86,21 @@ class WP_MailFrom_II {
 
 	/**
 	 * Load Text Domain Language Support
+	 *
+	 * @since  1.1
 	 */
 	public function load_plugin_textdomain() {
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
 		load_plugin_textdomain( $this->plugin_slug, false, dirname( $plugin_basename ) . '/languages/' );
 	}
-	
+
 	/**
 	 * Filter: wp_mail_from_name
 	 *
-	 * @param string $name Default name.
-	 * @return string $name WP Mail From name.
+	 * @since  1.1
+	 *
+	 * @param   string  $name  Default name.
+	 * @return  string         WP Mail From name.
 	 */
 	public function wp_mail_from_name( $name ) {
 		$wp_mailfrom_ii_name = get_option( 'wp_mailfrom_ii_name', '' );
@@ -103,12 +109,14 @@ class WP_MailFrom_II {
 		}
 		return $name;
 	}
-	
+
 	/**
 	 * Filter: wp_mail_from
 	 *
-	 * @param string $name Default email.
-	 * @return string $name WP Mail From email.
+	 * @since  1.1
+	 *
+	 * @param   string $name  Default email.
+	 * @return  string        WP Mail From email.
 	 */
 	public function wp_mail_from( $email ) {
 		$wp_mailfrom_ii_email = get_option( 'wp_mailfrom_ii_email', '' );
@@ -123,6 +131,8 @@ class WP_MailFrom_II {
 	 *
 	 * Checks to see if the name is the default name assigned by WordPress.
 	 * This is defined in wp_mail() in wp-includes/pluggable.php
+	 *
+	 * @since  1.1
 	 *
 	 * @param   string   $name  Name to check.
 	 * @return  boolean
@@ -141,6 +151,8 @@ class WP_MailFrom_II {
 	 *
 	 * Also note, some hosts may refuse to relay mail from an unknown domain. See
 	 * http://trac.wordpress.org/ticket/5007
+	 *
+	 * @since  1.1
 	 *
 	 * @param   string   $email  Email to check.
 	 * @return  boolean
@@ -167,6 +179,8 @@ class WP_MailFrom_II {
 	 * Also note, some hosts may refuse to relay mail from an unknown domain. See
 	 * http://trac.wordpress.org/ticket/5007
 	 *
+	 * @since  1.1
+	 *
 	 * @param   string   $email  Email to check.
 	 * @return  boolean
 	 */
@@ -175,32 +189,39 @@ class WP_MailFrom_II {
 			return true;
 		return false;
 	}
-	
+
 	/**
 	 * Legacy support for get_option( 'site_mail_from_name' )
+	 *
+	 * @since  1.1
 	 */
 	public function get_option_site_mail_from_name( $option, $default = false ) {
 		return get_option( 'wp_mailfrom_ii_name', $default );
 	}
-	
+
 	/**
 	 * Legacy support for get_option( 'site_mail_from_email' )
+	 *
+	 * @since  1.1
 	 */
 	public function get_option_site_mail_from_email( $option, $default = false ) {
 		return get_option( 'wp_mailfrom_ii_email', $default );
 	}
-	
+
 	/**
 	 * Register Activation
-	 * Perform upgrades etc.
+	 *
+	 * Called when plugin is activated. Not called when plugin is auto-updated.
+	 *
+	 * @since  1.1
 	 */
 	public static function activate() {
-		
+
 		// Temporarily remove our filter which provide support for legacy options
 		// (is only really needed if we can takeover the old plugin, but leave in for now)
 		remove_filter( 'pre_option_site_mail_from_name', 'get_option_site_mail_from_name', 1 );
 		remove_filter( 'pre_option_site_mail_from_email', 'get_option_site_mail_from_email', 1 );
-		
+
 		// Get old option value and try to assign them to new options
 		$name = get_option( 'site_mail_from_name', '' );
 		$email = get_option( 'site_mail_from_email', '' );
@@ -210,7 +231,7 @@ class WP_MailFrom_II {
 			$name_updated = add_option( 'wp_mailfrom_ii_name', $name );
 		if ( ! empty( $email ) && empty( $new_email ) )
 			$email_updated = add_option( 'wp_mailfrom_ii_email', $email );
-		
+
 		// If new options created delete old options
 		// (don't do this at the moment, only if we can takeover the old plugin)
 		/*
@@ -220,5 +241,5 @@ class WP_MailFrom_II {
 			delete_option( 'site_mail_from_email' );
 		*/
 	}
-	
+
 }
