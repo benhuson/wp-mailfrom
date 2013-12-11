@@ -43,8 +43,7 @@ class WP_MailFrom_II {
 	 * Constructor
 	 */
 	private function __construct() {
-		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
-		
+		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		// Name and email filter
 		add_filter( 'wp_mail_from_name', array( $this, 'wp_mail_from_name' ), 100 );
 		add_filter( 'wp_mail_from', array( $this, 'wp_mail_from' ), 100 );
