@@ -181,6 +181,7 @@ class WP_MailFrom_II {
 	 * @return  boolean
 	 */
 	public function is_admin_from( $email ) {
+		$admin_email = get_option( 'admin_email' );
 		if ( $email == $admin_email )
 			return true;
 		return false;
