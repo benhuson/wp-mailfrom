@@ -20,9 +20,9 @@ class WP_MailFrom_II_Admin {
 	/**
 	 * Slug of the plugin screen.
 	 *
-	 * @since    1.1
+	 * @since  1.1
 	 *
-	 * @var      string
+	 * @var    string
 	 */
 	protected $plugin_screen_hook_suffix = null;
 
@@ -128,7 +128,7 @@ class WP_MailFrom_II_Admin {
 	 *
 	 * Strips out all HTML, scripts, etc...
 	 *
-	 * @since  1.1
+	 * @since   1.1
 	 *
 	 * @param   string  $val  Name.
 	 * @return  string        Sanitized name.
@@ -182,6 +182,8 @@ class WP_MailFrom_II_Admin {
 	 * Plugin Row Meta
 	 *
 	 * Adds documentation, support and issue links below the plugin description on the plugins page.
+	 *
+	 * @since   1.1
 	 *
 	 * @param   array   $plugin_meta  Plugin meta display array.
 	 * @param   string  $plugin_file  Plugin reference.

@@ -93,7 +93,7 @@ class WP_MailFrom_II {
 	/**
 	 * Filter: wp_mail_from_name
 	 *
-	 * @since  1.1
+	 * @since   1.1
 	 *
 	 * @param   string  $name  Default name.
 	 * @return  string         WP Mail From name.
@@ -109,7 +109,7 @@ class WP_MailFrom_II {
 	/**
 	 * Filter: wp_mail_from
 	 *
-	 * @since  1.1
+	 * @since   1.1
 	 *
 	 * @param   string $name  Default email.
 	 * @return  string        WP Mail From email.
@@ -128,7 +128,7 @@ class WP_MailFrom_II {
 	 * Checks to see if the name is the default name assigned by WordPress.
 	 * This is defined in wp_mail() in wp-includes/pluggable.php
 	 *
-	 * @since  1.1
+	 * @since   1.1
 	 *
 	 * @param   string   $name  Name to check.
 	 * @return  boolean
@@ -142,7 +142,7 @@ class WP_MailFrom_II {
 	/**
 	 * Is Default From Email
 	 *
-	 * @since  1.1
+	 * @since   1.1
 	 *
 	 * @param   string   $email  Email to check.
 	 * @return  boolean
@@ -163,7 +163,7 @@ class WP_MailFrom_II {
 	 * Also note, some hosts may refuse to relay mail from an unknown domain. See
 	 * http://trac.wordpress.org/ticket/5007
 	 *
-	 * @since  1.1
+	 * @since   1.1
 	 *
 	 * @return  string  Default from email.
 	 */
@@ -183,7 +183,7 @@ class WP_MailFrom_II {
 	 * Also note, some hosts may refuse to relay mail from an unknown domain. See
 	 * http://trac.wordpress.org/ticket/5007
 	 *
-	 * @since  1.1
+	 * @since   1.1
 	 *
 	 * @param   string   $email  Email to check.
 	 * @return  boolean
