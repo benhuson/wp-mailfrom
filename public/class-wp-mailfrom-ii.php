@@ -142,6 +142,21 @@ class WP_MailFrom_II {
 	/**
 	 * Is Default From Email
 	 *
+	 * @since  1.1
+	 *
+	 * @param   string   $email  Email to check.
+	 * @return  boolean
+	 */
+	public function is_default_from( $email ) {
+		$default_email = $this->get_default_from();
+		if ( $email == $default_email )
+			return true;
+		return false;
+	}
+
+	/**
+	 * Get Default From Email
+	 *
 	 * Checks to see if the email is the default address assigned by WordPress.
 	 * This is defined in wp_mail() in wp-includes/pluggable.php
 	 *
@@ -150,21 +165,14 @@ class WP_MailFrom_II {
 	 *
 	 * @since  1.1
 	 *
-	 * @param   string   $email  Email to check.
-	 * @return  boolean
+	 * @return  string  Default from email.
 	 */
-	public function is_default_from( $email ) {
-
-		// Get the default from email address
+	public function get_default_from() {
 		$sitename = strtolower( $_SERVER['SERVER_NAME'] );
 		if ( substr( $sitename, 0, 4 ) == 'www.' ) {
 			$sitename = substr( $sitename, 4 );
 		}
-		$default_email = 'wordpress@' . $sitename;
-
-		if ( $email == $default_email )
-			return true;
-		return false;
+		return 'wordpress@' . $sitename;
 	}
 
 	/**
