@@ -38,6 +38,9 @@ class WP_MailFrom_II_Admin {
 		$plugin = WP_MailFrom_II::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
+		// Setup default options
+		add_action( 'admin_init', array( $this, 'setup_default_options' ) );
+
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
@@ -48,6 +51,16 @@ class WP_MailFrom_II_Admin {
 		$this->plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
 		add_filter( 'plugin_action_links_' . $this->plugin_basename, array( $this, 'add_action_links' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 4 );
+	}
+
+	/**
+	 * Setup default options.
+	 *
+	 * @since  1.1
+	 */
+	public function setup_default_options() {
+		add_option( 'wp_mailfrom_ii_override_default', 1 );
+		add_option( 'wp_mailfrom_ii_override_admin', 1 );
 	}
 
 	/**
@@ -119,8 +132,17 @@ class WP_MailFrom_II_Admin {
 			'wp_mailfrom_ii',
 			'wp_mailfrom_ii'
 		);
+		add_settings_field(
+			'wp_mailfrom_ii_override',
+			__( 'Override Emails From', $this->plugin_slug ),
+			array( $this, 'wp_mailfrom_ii_override_fields' ),
+			'wp_mailfrom_ii',
+			'wp_mailfrom_ii'
+		);
 		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_name', array( $this, 'sanitize_wp_mailfrom_ii_name' ) );
 		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_email', 'is_email' );
+		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_override_default', 'absint' );
+		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_override_admin', 'absint' );
 	}
 
 	/**
@@ -162,6 +184,18 @@ class WP_MailFrom_II_Admin {
 	 */
 	public function wp_mailfrom_ii_email_field() {
 		echo '<input name="wp_mailfrom_ii_email" type="text" id="wp_mailfrom_ii_email" value="' . get_option( 'wp_mailfrom_ii_email', '' ) . '" class="regular-text" />';
+	}
+
+	/**
+	 * Mail From Override Fields.
+	 *
+	 * @since  1.1
+	 */
+	public function wp_mailfrom_ii_override_fields() {
+		$wp_mailfrom = WP_MailFrom_II::get_instance();
+		$email = $wp_mailfrom->get_default_from();
+		echo '<input name="wp_mailfrom_ii_override_default" type="checkbox" id="wp_mailfrom_ii_override_default" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_default', 0 ), false ) . ' /> ' . __( 'Default WordPress Email', $this->plugin_slug ) . ' <span class="description">(' . $email . ')</span><br />';
+		echo '<input name="wp_mailfrom_ii_override_admin" type="checkbox" id="wp_mailfrom_ii_override_admin" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_admin', 0 ), false ) . ' /> ' . __( 'Admin Email', $this->plugin_slug ) . ' <span class="description">(' . get_option( 'admin_email' ) . ')</span>';
 	}
 
 	/**
