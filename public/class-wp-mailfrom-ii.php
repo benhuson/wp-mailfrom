@@ -179,11 +179,36 @@ return $wp_mailfrom_ii_email;
 	 * @return  string  Default from email.
 	 */
 	public function get_default_from() {
+
+		global $current_blog;
+
+		/**
+		 * Note: $_SERVER['SERVER_NAME'] not a reliable when generating email host names.
+		 * This method will likely be deprecated at some point.
+		 * See https://core.trac.wordpress.org/ticket/25239
+		 */
 		$sitename = strtolower( $_SERVER['SERVER_NAME'] );
 		if ( substr( $sitename, 0, 4 ) == 'www.' ) {
 			$sitename = substr( $sitename, 4 );
 		}
-		return 'wordpress@' . $sitename;
+		$email = 'wordpress@' . $sitename;
+
+		// If email is invalid, probably due to $_SERVER['SERVER_NAME']
+		// use the stored site URL instead.
+		if ( ! is_email( $email ) ) {
+
+			if ( is_multisite() ) {
+				$sitename = strtolower( $current_blog->domain );
+			} else {
+				$sitename = strtolower( parse_url( home_url(), PHP_URL_HOST ) );
+			}
+
+			$email = 'wordpress@' . preg_replace( '#^www\.#', '', $sitename );
+
+		}
+
+		return $email;
+
 	}
 
 	/**
