@@ -87,7 +87,7 @@ class WP_MailFrom_II {
 	 */
 	public function load_plugin_textdomain() {
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
-		load_plugin_textdomain( $this->plugin_slug, false, dirname( $plugin_basename ) . '/languages/' );
+		load_plugin_textdomain( 'wp-mailfrom-ii', false, dirname( $plugin_basename ) . '/languages/' );
 	}
 
 	/**

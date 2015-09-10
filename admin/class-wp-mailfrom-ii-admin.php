@@ -89,8 +89,8 @@ class WP_MailFrom_II_Admin {
 
 		// Add a settings page to the Settings menu
 		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'WP Mail From Plugin', $this->plugin_slug ),
-			__( 'Mail From', $this->plugin_slug ),
+			__( 'WP Mail From Plugin', 'wp-mailfrom-ii' ),
+			__( 'Mail From', 'wp-mailfrom-ii' ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
@@ -120,21 +120,21 @@ class WP_MailFrom_II_Admin {
 		);
 		add_settings_field(
 			'wp_mailfrom_ii_name',
-			__( 'From Name', $this->plugin_slug ),
+			__( 'From Name', 'wp-mailfrom-ii' ),
 			array( $this, 'wp_mailfrom_ii_name_field' ),
 			'wp_mailfrom_ii',
 			'wp_mailfrom_ii'
 		);
 		add_settings_field(
 			'wp_mailfrom_ii_email',
-			__( 'From Email Address', $this->plugin_slug ),
+			__( 'From Email Address', 'wp-mailfrom-ii' ),
 			array( $this, 'wp_mailfrom_ii_email_field' ),
 			'wp_mailfrom_ii',
 			'wp_mailfrom_ii'
 		);
 		add_settings_field(
 			'wp_mailfrom_ii_override',
-			__( 'Override Emails From', $this->plugin_slug ),
+			__( 'Override Emails From', 'wp-mailfrom-ii' ),
 			array( $this, 'wp_mailfrom_ii_override_fields' ),
 			'wp_mailfrom_ii',
 			'wp_mailfrom_ii'
@@ -165,7 +165,7 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function settings_section() {
-		echo '<p>' . __( 'If set, these two options will override the default name and email address in the &quot;From&quot; header on emails sent by WordPress.', $this->plugin_slug ) . '</p>';
+		echo '<p>' . __( 'If set, these two options will override the default name and email address in the &quot;From&quot; header on emails sent by WordPress.', 'wp-mailfrom-ii' ) . '</p>';
 	}
 
 	/**
@@ -194,8 +194,8 @@ class WP_MailFrom_II_Admin {
 	public function wp_mailfrom_ii_override_fields() {
 		$wp_mailfrom = WP_MailFrom_II::get_instance();
 		$email = $wp_mailfrom->get_default_from();
-		echo '<input name="wp_mailfrom_ii_override_default" type="checkbox" id="wp_mailfrom_ii_override_default" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_default', 0 ), false ) . ' /> ' . __( 'Default WordPress Email', $this->plugin_slug ) . ' <span class="description">(' . $email . ')</span><br />';
-		echo '<input name="wp_mailfrom_ii_override_admin" type="checkbox" id="wp_mailfrom_ii_override_admin" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_admin', 0 ), false ) . ' /> ' . __( 'Admin Email', $this->plugin_slug ) . ' <span class="description">(' . get_option( 'admin_email' ) . ')</span>';
+		echo '<input name="wp_mailfrom_ii_override_default" type="checkbox" id="wp_mailfrom_ii_override_default" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_default', 0 ), false ) . ' /> ' . __( 'Default WordPress Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . $email . ')</span><br />';
+		echo '<input name="wp_mailfrom_ii_override_admin" type="checkbox" id="wp_mailfrom_ii_override_admin" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_admin', 0 ), false ) . ' /> ' . __( 'Admin Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . get_option( 'admin_email' ) . ')</span>';
 	}
 
 	/**
@@ -206,7 +206,7 @@ class WP_MailFrom_II_Admin {
 	public function add_action_links( $links ) {
 		return array_merge(
 			array(
-				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . __( 'Settings', $this->plugin_slug ) . '</a>'
+				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . __( 'Settings', 'wp-mailfrom-ii' ) . '</a>'
 			),
 			$links
 		);
@@ -227,8 +227,8 @@ class WP_MailFrom_II_Admin {
 	 */
 	function plugin_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
 		if ( $this->plugin_basename == $plugin_file ) {
-			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', __( 'https://github.com/benhuson/wp-mailfrom', 'wp-geo' ), __( 'GitHub', 'wp-geo' ) );
-			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', __( 'http://wordpress.org/support/plugin/wp-mailfrom-ii', 'wp-geo' ), __( 'Support', 'wp-geo' ) );
+			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', __( 'https://github.com/benhuson/wp-mailfrom', 'wp-mailfrom-ii' ), __( 'GitHub', 'wp-mailfrom-ii' ) );
+			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', __( 'http://wordpress.org/support/plugin/wp-mailfrom-ii', 'wp-mailfrom-ii' ), __( 'Support', 'wp-mailfrom-ii' ) );
 		}
 		return $plugin_meta;
 	}

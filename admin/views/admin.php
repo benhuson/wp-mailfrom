@@ -15,6 +15,6 @@ if ( ! defined( 'WPINC' ) ) {
 		settings_fields( 'wp_mailfrom_ii' );
 		do_settings_sections( 'wp_mailfrom_ii' );
 		?>
-		<p class="submit"><input name="submit" type="submit" class="button button-primary" value="<?php esc_attr_e( 'Save Changes', $this->plugin_slug ); ?>" /></p>
+		<p class="submit"><input name="submit" type="submit" class="button button-primary" value="<?php esc_attr_e( 'Save Changes', 'wp-mailfrom-ii' ); ?>" /></p>
 	</form>
 </div>
