@@ -227,7 +227,7 @@ class WP_MailFrom_II_Admin {
 	 */
 	function plugin_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
 		if ( $this->plugin_basename == $plugin_file ) {
-			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', __( 'https://github.com/benhuson/wp-mailfrom', 'wp-mailfrom-ii' ), __( 'GitHub', 'wp-mailfrom-ii' ) );
+			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', 'https://github.com/benhuson/wp-mailfrom', __( 'GitHub', 'wp-mailfrom-ii' ) );
 			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', __( 'http://wordpress.org/support/plugin/wp-mailfrom-ii', 'wp-mailfrom-ii' ), __( 'Support', 'wp-mailfrom-ii' ) );
 		}
 		return $plugin_meta;
