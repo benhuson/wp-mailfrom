@@ -47,8 +47,8 @@ get_option( 'site_mail_from_email' );`
 
 You should now use:
 
-`get_option( 'wp_mailfrom_name' );
-get_option( 'wp_mailfrom_email' );`
+`get_option( 'wp_mailfrom_ii_name' );
+get_option( 'wp_mailfrom_ii_email' );`
 
 
 == Frequently Asked Questions ==
