@@ -174,7 +174,7 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function wp_mailfrom_ii_name_field() {
-		echo '<input name="wp_mailfrom_ii_name" type="text" id="wp_mailfrom_ii_name" value="' . get_option( 'wp_mailfrom_ii_name', '' ) . '" class="regular-text" />';
+		echo '<input name="wp_mailfrom_ii_name" type="text" id="wp_mailfrom_ii_name" value="' . esc_attr( get_option( 'wp_mailfrom_ii_name', '' ) ) . '" class="regular-text" />';
 	}
 
 	/**
@@ -183,7 +183,7 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function wp_mailfrom_ii_email_field() {
-		echo '<input name="wp_mailfrom_ii_email" type="text" id="wp_mailfrom_ii_email" value="' . get_option( 'wp_mailfrom_ii_email', '' ) . '" class="regular-text" />';
+		echo '<input name="wp_mailfrom_ii_email" type="text" id="wp_mailfrom_ii_email" value="' . esc_attr( get_option( 'wp_mailfrom_ii_email', '' ) ) . '" class="regular-text" />';
 	}
 
 	/**
@@ -194,8 +194,8 @@ class WP_MailFrom_II_Admin {
 	public function wp_mailfrom_ii_override_fields() {
 		$wp_mailfrom = WP_MailFrom_II::get_instance();
 		$email = $wp_mailfrom->get_default_from();
-		echo '<input name="wp_mailfrom_ii_override_default" type="checkbox" id="wp_mailfrom_ii_override_default" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_default', 0 ), false ) . ' /> ' . __( 'Default WordPress Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . $email . ')</span><br />';
-		echo '<input name="wp_mailfrom_ii_override_admin" type="checkbox" id="wp_mailfrom_ii_override_admin" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_admin', 0 ), false ) . ' /> ' . __( 'Admin Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . get_option( 'admin_email' ) . ')</span>';
+		echo '<input name="wp_mailfrom_ii_override_default" type="checkbox" id="wp_mailfrom_ii_override_default" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_default', 0 ), false ) . ' /> ' . esc_html__( 'Default WordPress Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . esc_html( $email ) . ')</span><br />';
+		echo '<input name="wp_mailfrom_ii_override_admin" type="checkbox" id="wp_mailfrom_ii_override_admin" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_admin', 0 ), false ) . ' /> ' . esc_html__( 'Admin Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . esc_html( get_option( 'admin_email' ) ) . ')</span>';
 	}
 
 	/**
@@ -206,7 +206,7 @@ class WP_MailFrom_II_Admin {
 	public function add_action_links( $links ) {
 		return array_merge(
 			array(
-				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . __( 'Settings', 'wp-mailfrom-ii' ) . '</a>'
+				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . esc_html__( 'Settings', 'wp-mailfrom-ii' ) . '</a>'
 			),
 			$links
 		);
@@ -227,8 +227,8 @@ class WP_MailFrom_II_Admin {
 	 */
 	function plugin_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
 		if ( $this->plugin_basename == $plugin_file ) {
-			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', 'https://github.com/benhuson/wp-mailfrom', __( 'GitHub', 'wp-mailfrom-ii' ) );
-			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', __( 'http://wordpress.org/support/plugin/wp-mailfrom-ii', 'wp-mailfrom-ii' ), __( 'Support', 'wp-mailfrom-ii' ) );
+			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', 'https://github.com/benhuson/wp-mailfrom', esc_html__( 'GitHub', 'wp-mailfrom-ii' ) );
+			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', esc_url( __( 'http://wordpress.org/support/plugin/wp-mailfrom-ii', 'wp-mailfrom-ii' ) ), esc_html__( 'Support', 'wp-mailfrom-ii' ) );
 		}
 		return $plugin_meta;
 	}
