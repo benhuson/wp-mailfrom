@@ -116,18 +116,16 @@ class WP_MailFrom_II {
 	 */
 	public function wp_mail_from( $email ) {
 		$wp_mailfrom_ii_email = get_option( 'wp_mailfrom_ii_email', '' );
-		if ( ! empty( $wp_mailfrom_ii_email ) ) {
+		if ( ! empty( $wp_mailfrom_ii_email ) && is_email( $wp_mailfrom_ii_email ) ) {
 			$override_default = get_option( 'wp_mailfrom_ii_override_default', 0 );
 			$override_admin = get_option( 'wp_mailfrom_ii_override_admin', 0 );
 
 			if ( $override_default == 1 && $this->is_default_from( $email ) ) {
-				return $email;
+				return $wp_mailfrom_ii_email;
 			}
 			if ( $override_admin == 1 && $this->is_admin_from( $email ) ) {
-				return $email;
+				return $wp_mailfrom_ii_email;
 			}
-return $wp_mailfrom_ii_email;
-
 
 		}
 		return $email;
