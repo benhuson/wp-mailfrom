@@ -169,6 +169,9 @@ class WP_MailFrom_II {
 	 * Checks to see if the email is the default address assigned by WordPress.
 	 * This is defined in wp_mail() in wp-includes/pluggable.php
 	 *
+	 * The 'wp_mailfrom_ii_default_from' filter is provided so you can add compatibility when
+	 * the pluggable wp_mail() function is altered to use a different default email address.
+	 *
 	 * Also note, some hosts may refuse to relay mail from an unknown domain. See
 	 * http://trac.wordpress.org/ticket/5007
 	 *
@@ -181,7 +184,7 @@ class WP_MailFrom_II {
 		if ( substr( $sitename, 0, 4 ) == 'www.' ) {
 			$sitename = substr( $sitename, 4 );
 		}
-		return 'wordpress@' . $sitename;
+		return apply_filters( 'wp_mailfrom_ii_default_from', 'wordpress@' . $sitename );
 	}
 
 	/**
