@@ -1,6 +1,6 @@
 === WP Mail From II ===
 Contributors: husobj
-Donate link: http://www.benhuson.co.uk/donate/
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DMFEA5C6ABCL
 Tags: mail from, from email, email from, from address, mail, email, smtp, from address, email address, from header
 Requires at least: 3.5
 Tested up to: 4.3.1
