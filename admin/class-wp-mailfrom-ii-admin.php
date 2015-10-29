@@ -225,7 +225,7 @@ class WP_MailFrom_II_Admin {
 	 * @param   string  $status       Plugin status.
 	 * @return  array                 Plugin meta array.
 	 */
-	function plugin_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
+	public function plugin_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
 		if ( $this->plugin_basename == $plugin_file ) {
 			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', 'https://github.com/benhuson/wp-mailfrom', esc_html__( 'GitHub', 'wp-mailfrom-ii' ) );
 			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', esc_url( __( 'http://wordpress.org/support/plugin/wp-mailfrom-ii', 'wp-mailfrom-ii' ) ), esc_html__( 'Support', 'wp-mailfrom-ii' ) );
