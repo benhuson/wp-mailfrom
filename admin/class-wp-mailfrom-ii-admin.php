@@ -194,8 +194,8 @@ class WP_MailFrom_II_Admin {
 	public function wp_mailfrom_ii_override_fields() {
 		$wp_mailfrom = WP_MailFrom_II::get_instance();
 		$email = $wp_mailfrom->get_default_from();
-		echo '<input name="wp_mailfrom_ii_override_default" type="checkbox" id="wp_mailfrom_ii_override_default" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_default', 0 ), false ) . ' /> ' . esc_html__( 'Default WordPress Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . esc_html( $email ) . ')</span><br />';
-		echo '<input name="wp_mailfrom_ii_override_admin" type="checkbox" id="wp_mailfrom_ii_override_admin" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_admin', 0 ), false ) . ' /> ' . esc_html__( 'Admin Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . esc_html( get_option( 'admin_email' ) ) . ')</span>';
+		echo '<label><input name="wp_mailfrom_ii_override_default" type="checkbox" id="wp_mailfrom_ii_override_default" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_default', 0 ), false ) . ' /> ' . esc_html__( 'Default WordPress Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . esc_html( $email ) . ')</span></label><br />';
+		echo '<label><input name="wp_mailfrom_ii_override_admin" type="checkbox" id="wp_mailfrom_ii_override_admin" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_admin', 0 ), false ) . ' /> ' . esc_html__( 'Admin Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . esc_html( get_option( 'admin_email' ) ) . ')</span></label>';
 	}
 
 	/**
