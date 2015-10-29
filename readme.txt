@@ -2,9 +2,9 @@
 Contributors: husobj
 Donate link: http://www.benhuson.co.uk/donate/
 Tags: mail from, from email, email from, from address, mail, email, smtp, from address, email address, from header
-Requires at least: 2.9
-Tested up to: 3.7.1
-Stable tag: 1.0.2
+Requires at least: 3.5
+Tested up to: 4.3.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,13 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 
 == Changelog ==
 
+= 1.1 =
+* Add options to override default WordPress email address and admin email address.
+* Added 'wp_mailfrom_ii_default_from' filter so you can add compatibility if the pluggable wp_mail() function is altered to use a different default email address.
+* Delete plugin options when uninstalled.
+* Reworked as a singleton class.
+* Remove filter support for original WP MailFrom plugin.
+
 = 1.0.2 =
 * Only set email address and name if overwriting the default WordPress values.
 
@@ -79,6 +86,15 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 * Stores name and email as `wp_mailfrom_ii_name` and `wp_mailfrom_ii_email` options. Upgrade support provided for old options.
 
 == Upgrade Notice ==
+
+= 1.1 =
+Added options to override default WordPress email addresses and added 'wp_mailfrom_ii_default_from' filter.
+
+= 1.0.2 =
+Only set email address and name if overwriting the default WordPress values.
+
+= 1.0.1 =
+Correctly style save settings button.
 
 = 1.0 =
 This version is pretty much a complete re-write, fixes loads of bugs and works with the most recent versions of WordPress.
