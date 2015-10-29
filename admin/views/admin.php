@@ -5,11 +5,15 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+global $wp_version;
+
+$header_tag = version_compare( $wp_version, '4.3', '>=' ) ? 'h1' : 'h2';
+
 ?>
 
 <div class="wrap">
 	<?php screen_icon(); ?>
-	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+	<?php printf( '<%s>', $header_tag ); ?><?php echo esc_html( get_admin_page_title() ); ?><?php printf( '</%s>', $header_tag ); ?>
 	<form action="options.php" method="post">
 		<?php
 		settings_fields( 'wp_mailfrom_ii' );
