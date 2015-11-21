@@ -12,7 +12,7 @@ Allows you to configure the default email address and name used for emails sent 
 
 == Description ==
 
-This plugin allows you to set the email address and name used on email sent by WordPress by setting the *From:* header.
+This plugin allows you to set the email address and name used for emails sent by WordPress by setting the *From:* header.
 
 It is an updated and fully re-worked version of the [WP Mail From](http://wordpress.org/extend/plugins/wp-mailfrom/) plugin by Tristan Aston and now works with the latest versions of WordPress.
 
@@ -40,7 +40,7 @@ To upgrade simply activate this plugin then deactivate the old WP Mail From plug
 Option naming conventions have changed in this version of the plugin.
 If you accessed either of the options directly for any reason you will need to re-factor you code as support for the old options will be removed in a future version.
 
-The old options could be retrieved as follows:
+The old options used to be retrieved as follows:
 
 `get_option( 'site_mail_from_name' );
 get_option( 'site_mail_from_email' );`
@@ -68,7 +68,7 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 == Changelog ==
 
 = 1.1 =
-* Add options to override default WordPress email address and admin email address.
+* Added options to override the default WordPress email address and admin email address.
 * Added 'wp_mailfrom_ii_default_from' filter so you can add compatibility if the pluggable wp_mail() function is altered to use a different default email address.
 * Delete plugin options when uninstalled.
 * Reworked as a singleton class.
@@ -78,12 +78,12 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 * Only set email address and name if overwriting the default WordPress values.
 
 = 1.0.1 =
-* Correctly style save settings button.
+* Correctly style "save settings" button.
 
 = 1.0 =
 * Pretty much re-coded from scratch - now based around a core WP_MailFrom_II class.
 * Uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API).
-* Stores name and email as `wp_mailfrom_ii_name` and `wp_mailfrom_ii_email` options. Upgrade support provided for old options.
+* Stores name and email as `wp_mailfrom_ii_name` and `wp_mailfrom_ii_email` options. Upgrade support is provided for old options.
 
 == Upgrade Notice ==
 
