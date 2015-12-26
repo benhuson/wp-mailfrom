@@ -123,14 +123,16 @@ class WP_MailFrom_II_Admin {
 			__( 'From Name', 'wp-mailfrom-ii' ),
 			array( $this, 'wp_mailfrom_ii_name_field' ),
 			'wp_mailfrom_ii',
-			'wp_mailfrom_ii'
+			'wp_mailfrom_ii',
+			array( 'label_for' => 'wp_mailfrom_ii_name' )
 		);
 		add_settings_field(
 			'wp_mailfrom_ii_email',
 			__( 'From Email Address', 'wp-mailfrom-ii' ),
 			array( $this, 'wp_mailfrom_ii_email_field' ),
 			'wp_mailfrom_ii',
-			'wp_mailfrom_ii'
+			'wp_mailfrom_ii',
+			array( 'label_for' => 'wp_mailfrom_ii_email' )
 		);
 		add_settings_field(
 			'wp_mailfrom_ii_override',
