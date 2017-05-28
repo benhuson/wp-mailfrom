@@ -42,9 +42,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Fork of original [WP Mail From](https://wordpress.org/plugins/wp-mailfrom/) plugin
 
-[Unreleased]: https://github.com/benhuson/password-protected/compare/1.1...HEAD
-[1.1]: https://github.com/benhuson/password-protected/compare/1.0.2...1.1
-[1.0.2]: https://github.com/benhuson/password-protected/compare/1.0.1...1.0.2
-[1.0.1]: https://github.com/benhuson/password-protected/compare/1.0...1.0.1
-[1.0]: https://github.com/benhuson/password-protected/compare/0.6...1.0
+[Unreleased]: https://github.com/benhuson/wp-mailfrom/compare/1.1...HEAD
+[1.1]: https://github.com/benhuson/wp-mailfrom/compare/1.0.2...1.1
+[1.0.2]: https://github.com/benhuson/wp-mailfrom/compare/1.0.1...1.0.2
+[1.0.1]: https://github.com/benhuson/wp-mailfrom/compare/1.0...1.0.1
+[1.0]: https://github.com/benhuson/wp-mailfrom/compare/0.6...1.0
 [0.6]: https://github.com/benhuson/wp-mailfrom/releases/tag/0.6
