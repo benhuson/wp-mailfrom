@@ -1,13 +1,13 @@
 <?php
 
 /**
+ * @package     WP Mail From II
+ * @subpackage  Uninstall
+ *
  * Fired when the plugin is uninstalled.
  */
 
-// If uninstall not called from WordPress, then exit
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	exit;
-}
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) exit;  // If uninstall not called from WordPress, then exit
 
 // Delete options
 delete_option( 'wp_mailfrom_ii_name' );
