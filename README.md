@@ -55,6 +55,9 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 Upgrade Notice
 --------------
 
+### 1.1.1
+Update translations and bumped WordPress requirements.
+
 ### 1.1
 Added options to override default WordPress email addresses and added 'wp_mailfrom_ii_default_from' filter.
 
