@@ -6,6 +6,9 @@
  * This class is used to work with the
  * administrative side of the WordPress site.
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit;  // Exit if accessed directly
+
 class WP_MailFrom_II_Admin {
 
 	/**

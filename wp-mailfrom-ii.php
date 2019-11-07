@@ -12,17 +12,12 @@
  * License URI:        http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:        /languages
  * GitHub Plugin URI:  https://github.com/benhuson/wp-mailfrom
+ *
+ * An updated and fully re-worked version of the WP Mail From plugin by Tristan Aston.
+ * http://wordpress.org/extend/plugins/wp-mailfrom/
  */
 
-/*
-An updated and fully re-worked version of the WP Mail From plugin by Tristan Aston.
-http://wordpress.org/extend/plugins/wp-mailfrom/
-*/
-
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+if ( ! defined( 'ABSPATH' ) ) exit;  // Exit if accessed directly
 
 /**
  * Require public files

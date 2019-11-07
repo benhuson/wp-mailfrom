@@ -6,6 +6,9 @@
  * This class should be used to work with the
  * public-facing side of the WordPress site.
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit;  // Exit if accessed directly
+
 class WP_MailFrom_II {
 
 	/**
