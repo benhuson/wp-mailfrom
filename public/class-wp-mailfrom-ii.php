@@ -49,11 +49,13 @@ class WP_MailFrom_II {
 	 * @since  1.1
 	 */
 	private function __construct() {
+
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
 		// Name and email filter
 		add_filter( 'wp_mail_from_name', array( $this, 'wp_mail_from_name' ), 100 );
 		add_filter( 'wp_mail_from', array( $this, 'wp_mail_from' ), 100 );
+
 	}
 
 	/**
@@ -71,6 +73,7 @@ class WP_MailFrom_II {
 		}
 
 		return self::$instance;
+
 	}
 
 	/**
@@ -81,7 +84,9 @@ class WP_MailFrom_II {
 	 * @return  Plugin slug variable.
 	 */
 	public function get_plugin_slug() {
+
 		return $this->plugin_slug;
+
 	}
 
 	/**
@@ -90,8 +95,10 @@ class WP_MailFrom_II {
 	 * @since  1.1
 	 */
 	public function load_plugin_textdomain() {
+
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
 		load_plugin_textdomain( 'wp-mailfrom-ii', false, dirname( $plugin_basename ) . '/languages/' );
+
 	}
 
 	/**
@@ -103,11 +110,15 @@ class WP_MailFrom_II {
 	 * @return  string         WP Mail From name.
 	 */
 	public function wp_mail_from_name( $name ) {
+
 		$wp_mailfrom_ii_name = get_option( 'wp_mailfrom_ii_name', '' );
+
 		if ( ! empty( $wp_mailfrom_ii_name ) && ! $this->is_default_from_name( $wp_mailfrom_ii_name ) ) {
 			return $wp_mailfrom_ii_name;
 		}
+
 		return $name;
+
 	}
 
 	/**
@@ -119,20 +130,26 @@ class WP_MailFrom_II {
 	 * @return  string        WP Mail From email.
 	 */
 	public function wp_mail_from( $email ) {
+
 		$wp_mailfrom_ii_email = get_option( 'wp_mailfrom_ii_email', '' );
+
 		if ( ! empty( $wp_mailfrom_ii_email ) && is_email( $wp_mailfrom_ii_email ) ) {
+
 			$override_default = get_option( 'wp_mailfrom_ii_override_default', 0 );
 			$override_admin = get_option( 'wp_mailfrom_ii_override_admin', 0 );
 
 			if ( $override_default == 1 && $this->is_default_from( $email ) ) {
 				return $wp_mailfrom_ii_email;
 			}
+
 			if ( $override_admin == 1 && $this->is_admin_from( $email ) ) {
 				return $wp_mailfrom_ii_email;
 			}
 
 		}
+
 		return $email;
+
 	}
 
 	/**
@@ -147,9 +164,9 @@ class WP_MailFrom_II {
 	 * @return  boolean
 	 */
 	public function is_default_from_name( $name ) {
-		if ( $name == 'WordPress' )
-			return true;
-		return false;
+
+		return 'WordPress' == $name;
+
 	}
 
 	/**
@@ -161,10 +178,9 @@ class WP_MailFrom_II {
 	 * @return  boolean
 	 */
 	public function is_default_from( $email ) {
-		$default_email = $this->get_default_from();
-		if ( $email == $default_email )
-			return true;
-		return false;
+
+		return $this->get_default_from() == $email;
+
 	}
 
 	/**
@@ -184,11 +200,15 @@ class WP_MailFrom_II {
 	 * @return  string  Default from email.
 	 */
 	public function get_default_from() {
+
 		$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+
 		if ( substr( $sitename, 0, 4 ) == 'www.' ) {
 			$sitename = substr( $sitename, 4 );
 		}
+
 		return apply_filters( 'wp_mailfrom_ii_default_from', 'wordpress@' . $sitename );
+
 	}
 
 	/**
@@ -205,10 +225,9 @@ class WP_MailFrom_II {
 	 * @return  boolean
 	 */
 	public function is_admin_from( $email ) {
-		$admin_email = get_option( 'admin_email' );
-		if ( $email == $admin_email )
-			return true;
-		return false;
+
+		return get_option( 'admin_email' ) == $email;
+
 	}
 
 	/**
@@ -220,16 +239,21 @@ class WP_MailFrom_II {
 	 */
 	public static function activate() {
 
-		// Copy values from original WP MailFrom if present and plugin optionsnot yet set.
+		// Copy values from original WP MailFrom if present and plugin options not yet set.
 		// http://wordpress.org/plugins/wp-mailfrom/
 		$name = get_option( 'site_mail_from_name', '' );
 		$email = get_option( 'site_mail_from_email', '' );
 		$new_name = get_option( 'wp_mailfrom_ii_name', '' );
 		$new_email = get_option( 'wp_mailfrom_ii_email', '' );
-		if ( ! empty( $name ) && empty( $new_name ) )
+
+		if ( ! empty( $name ) && empty( $new_name ) ) {
 			$name_updated = add_option( 'wp_mailfrom_ii_name', $name );
-		if ( ! empty( $email ) && empty( $new_email ) )
+		}
+
+		if ( ! empty( $email ) && empty( $new_email ) ) {
 			$email_updated = add_option( 'wp_mailfrom_ii_email', $email );
+		}
+
 	}
 
 }
