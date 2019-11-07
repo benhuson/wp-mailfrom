@@ -1,6 +1,9 @@
 <?php
 
 /**
+ * @package     WP Mail From II
+ * @subpackage  Uninstall
+ *
  * Fired when the plugin is uninstalled.
  */
 

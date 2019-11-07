@@ -1,7 +1,8 @@
 <?php
 
 /**
- * WP MailFrom II Class
+ * @package     WP Mail From II
+ * @subpackage  Public Class
  *
  * This class should be used to work with the
  * public-facing side of the WordPress site.

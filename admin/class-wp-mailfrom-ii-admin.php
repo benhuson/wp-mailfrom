@@ -1,7 +1,8 @@
 <?php
 
 /**
- * WP MailFrom II Admin Class
+ * @package     WP Mail From II
+ * @subpackage  Admin Class
  *
  * This class is used to work with the
  * administrative side of the WordPress site.
