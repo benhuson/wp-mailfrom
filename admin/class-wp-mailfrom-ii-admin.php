@@ -1,11 +1,15 @@
 <?php
 
 /**
- * WP MailFrom II Admin Class
+ * @package     WP Mail From II
+ * @subpackage  Admin Class
  *
  * This class is used to work with the
  * administrative side of the WordPress site.
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit;  // Exit if accessed directly
+
 class WP_MailFrom_II_Admin {
 
 	/**
@@ -51,6 +55,7 @@ class WP_MailFrom_II_Admin {
 		$this->plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_slug . '.php' );
 		add_filter( 'plugin_action_links_' . $this->plugin_basename, array( $this, 'add_action_links' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 4 );
+
 	}
 
 	/**
@@ -59,8 +64,10 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function setup_default_options() {
+
 		add_option( 'wp_mailfrom_ii_override_default', 1 );
 		add_option( 'wp_mailfrom_ii_override_admin', 1 );
+
 	}
 
 	/**
@@ -78,6 +85,7 @@ class WP_MailFrom_II_Admin {
 		}
 
 		return self::$instance;
+
 	}
 
 	/**
@@ -95,6 +103,7 @@ class WP_MailFrom_II_Admin {
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
 		);
+
 	}
 
 	/**
@@ -103,7 +112,9 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function display_plugin_admin_page() {
+
 		include_once( 'views/admin.php' );
+
 	}
 
 	/**
@@ -112,6 +123,7 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function settings() {
+
 		add_settings_section(
 			'wp_mailfrom_ii',
 			'',
@@ -139,10 +151,12 @@ class WP_MailFrom_II_Admin {
 			'wp_mailfrom_ii',
 			'wp_mailfrom_ii'
 		);
+
 		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_name', array( $this, 'sanitize_wp_mailfrom_ii_name' ) );
 		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_email', 'is_email' );
 		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_override_default', 'absint' );
 		register_setting( 'wp_mailfrom_ii', 'wp_mailfrom_ii_override_admin', 'absint' );
+
 	}
 
 	/**
@@ -156,7 +170,9 @@ class WP_MailFrom_II_Admin {
 	 * @return  string        Sanitized name.
 	 */
 	public function sanitize_wp_mailfrom_ii_name( $val ) {
+
 		return wp_kses( $val, array() );
+
 	}
 
 	/**
@@ -165,7 +181,9 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function settings_section() {
+
 		echo '<p>' . __( 'If set, these two options will override the default name and email address in the &quot;From&quot; header on emails sent by WordPress.', 'wp-mailfrom-ii' ) . '</p>';
+
 	}
 
 	/**
@@ -174,7 +192,9 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function wp_mailfrom_ii_name_field() {
+
 		echo '<input name="wp_mailfrom_ii_name" type="text" id="wp_mailfrom_ii_name" value="' . esc_attr( get_option( 'wp_mailfrom_ii_name', '' ) ) . '" class="regular-text" />';
+
 	}
 
 	/**
@@ -183,7 +203,9 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function wp_mailfrom_ii_email_field() {
+
 		echo '<input name="wp_mailfrom_ii_email" type="text" id="wp_mailfrom_ii_email" value="' . esc_attr( get_option( 'wp_mailfrom_ii_email', '' ) ) . '" class="regular-text" />';
+
 	}
 
 	/**
@@ -192,10 +214,13 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function wp_mailfrom_ii_override_fields() {
+
 		$wp_mailfrom = WP_MailFrom_II::get_instance();
 		$email = $wp_mailfrom->get_default_from();
+
 		echo '<label><input name="wp_mailfrom_ii_override_default" type="checkbox" id="wp_mailfrom_ii_override_default" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_default', 0 ), false ) . ' /> ' . esc_html__( 'Default WordPress Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . esc_html( $email ) . ')</span></label><br />';
 		echo '<label><input name="wp_mailfrom_ii_override_admin" type="checkbox" id="wp_mailfrom_ii_override_admin" value="1"' . checked( 1, get_option( 'wp_mailfrom_ii_override_admin', 0 ), false ) . ' /> ' . esc_html__( 'Admin Email', 'wp-mailfrom-ii' ) . ' <span class="description">(' . esc_html( get_option( 'admin_email' ) ) . ')</span></label>';
+
 	}
 
 	/**
@@ -204,12 +229,14 @@ class WP_MailFrom_II_Admin {
 	 * @since  1.1
 	 */
 	public function add_action_links( $links ) {
+
 		return array_merge(
 			array(
 				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . esc_html__( 'Settings', 'wp-mailfrom-ii' ) . '</a>'
 			),
 			$links
 		);
+
 	}
 
 	/**
@@ -226,11 +253,14 @@ class WP_MailFrom_II_Admin {
 	 * @return  array                 Plugin meta array.
 	 */
 	public function plugin_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
+
 		if ( $this->plugin_basename == $plugin_file ) {
 			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', 'https://github.com/benhuson/wp-mailfrom', esc_html__( 'GitHub', 'wp-mailfrom-ii' ) );
 			$plugin_meta[] = sprintf( '<a href="%s">%s</a>', esc_url( __( 'http://wordpress.org/support/plugin/wp-mailfrom-ii', 'wp-mailfrom-ii' ) ), esc_html__( 'Support', 'wp-mailfrom-ii' ) );
 		}
+
 		return $plugin_meta;
+
 	}
 
 }
