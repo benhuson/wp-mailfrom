@@ -4,10 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- Make admin field labels clickable. Props [Viktor Szépe](https://github.com/szepeviktor).
+
 ## [1.1.1] - 2019-11-07
 
 ### Added
-- Added Hungarian translation. Props Viktor Szépe.
+- Added Hungarian translation. Props [Viktor Szépe](https://github.com/szepeviktor).
 
 ### Changed
 - Bump WordPress requirements.

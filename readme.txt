@@ -67,8 +67,11 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 
 == Changelog ==
 
+= Unreleased =
+* Make admin field labels clickable. Props [Viktor Szépe](https://github.com/szepeviktor).
+
 = 1.1.1 =
-* Update translations.
+* Added Hungarian translation. Props [Viktor Szépe](https://github.com/szepeviktor).
 * Bump WordPress requirements.
 
 = 1.1 =
