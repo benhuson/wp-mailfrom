@@ -13,7 +13,6 @@ global $wp_version;
 
 <div class="wrap">
 
-	<?php screen_icon(); ?>
 	<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 
 	<form action="options.php" method="post">
