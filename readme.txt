@@ -3,8 +3,8 @@ Contributors: husobj
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DMFEA5C6ABCL
 Tags: mail from, from email, email from, from address, mail, email, smtp, from address, email address, from header
 Requires at least: 4.3
-Tested up to: 5.2.3
-Stable tag: 1.1.1
+Tested up to: 5.4.4
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,8 +67,12 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 
 == Changelog ==
 
+= 1.2 =
+* Make admin field labels clickable. Props [Viktor Szépe](https://github.com/szepeviktor).
+* Remove deprecated `screen_icon()`.
+
 = 1.1.1 =
-* Update translations.
+* Added Hungarian translation. Props [Viktor Szépe](https://github.com/szepeviktor).
 * Bump WordPress requirements.
 
 = 1.1 =

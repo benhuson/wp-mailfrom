@@ -2,12 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.2] - 2020-12-14
+
+### Added
+- Make admin field labels clickable. Props [Viktor Szépe](https://github.com/szepeviktor).
+
+### Fixed
+- Remove deprecated `screen_icon()`.
 
 ## [1.1.1] - 2019-11-07
 
 ### Added
-- Added Hungarian translation. Props Viktor Szépe.
+- Added Hungarian translation. Props [Viktor Szépe](https://github.com/szepeviktor).
 
 ### Changed
 - Bump WordPress requirements.
@@ -47,7 +53,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Fork of original [WP Mail From](https://wordpress.org/plugins/wp-mailfrom/) plugin
 
-[Unreleased]: https://github.com/benhuson/wp-mailfrom/compare/1.1.1...HEAD
+[Unreleased]: https://github.com/benhuson/wp-mailfrom/compare/1.2...HEAD
+[1.2]: https://github.com/benhuson/wp-mailfrom/compare/1.1.1...1.2
 [1.1.1]: https://github.com/benhuson/wp-mailfrom/compare/1.1...1.1.1
 [1.1]: https://github.com/benhuson/wp-mailfrom/compare/1.0.2...1.1
 [1.0.2]: https://github.com/benhuson/wp-mailfrom/compare/1.0.1...1.0.2

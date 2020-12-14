@@ -55,6 +55,9 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 Upgrade Notice
 --------------
 
+### 1.2
+Makes admin field labels clickable and removes deprecated `screen_icon()`.
+
 ### 1.1.1
 Update translations and bumped WordPress requirements.
 

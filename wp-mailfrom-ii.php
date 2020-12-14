@@ -2,15 +2,17 @@
 
 /**
  * Plugin Name:        WP Mail From II
- * Plugin URI:         http://wordpress.org/plugins/wp-mailfrom-ii/
+ * Plugin URI:         https://wordpress.org/plugins/wp-mailfrom-ii/
  * Description:        Allows you to configure the default email address and name used for emails sent by WordPress.
- * Version:            1.1.1
+ * Version:            1.2
  * Author:             Ben Huson
  * Author URI:         https://github.com/benhuson/
+ * Minimum WordPress Version Required: 4.3
+ * Tested up to:       5.4.4
  * Text Domain:        wp-mailfrom-ii
+ * Domain Path:        /languages
  * License:            GPL-2.0+
  * License URI:        http://www.gnu.org/licenses/gpl-2.0.txt
- * Domain Path:        /languages
  * GitHub Plugin URI:  https://github.com/benhuson/wp-mailfrom
  *
  * An updated and fully re-worked version of the WP Mail From plugin by Tristan Aston.
