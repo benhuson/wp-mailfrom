@@ -67,6 +67,9 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 
 == Changelog ==
 
+= Unreleased =
+* New method of getting sitename in WordPress 5.5+
+
 = 1.2 =
 * Make admin field labels clickable. Props [Viktor Szépe](https://github.com/szepeviktor).
 * Remove deprecated `screen_icon()`.

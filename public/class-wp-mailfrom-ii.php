@@ -201,9 +201,21 @@ class WP_MailFrom_II {
 	 */
 	public function get_default_from() {
 
-		$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+		global $wp_version;
 
-		if ( substr( $sitename, 0, 4 ) == 'www.' ) {
+		/**
+		 * New method of getting sitename in WordPress 5.5+
+		 *
+		 * @see  https://core.trac.wordpress.org/ticket/25239#comment:114
+		 * @see  https://core.trac.wordpress.org/changeset/48601
+		 */
+		if ( version_compare( $wp_version, '5.5' ) >= 0 ) {
+			$sitename = wp_parse_url( network_home_url(), PHP_URL_HOST );
+		} else {
+			$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+		}
+
+		if ( 'www.' === substr( $sitename, 0, 4 ) ) {
 			$sitename = substr( $sitename, 4 );
 		}
 

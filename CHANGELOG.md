@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+### Changed
+- New method of getting sitename in WordPress 5.5+
+
 ## [1.2] - 2020-12-14
 
 ### Added
