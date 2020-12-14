@@ -155,9 +155,6 @@ class WP_MailFrom_II {
 	/**
 	 * Is Default From Name
 	 *
-	 * Checks to see if the name is the default name assigned by WordPress.
-	 * This is defined in wp_mail() in wp-includes/pluggable.php
-	 *
 	 * @since   1.1
 	 *
 	 * @param   string   $name  Name to check.
@@ -165,7 +162,21 @@ class WP_MailFrom_II {
 	 */
 	public function is_default_from_name( $name ) {
 
-		return 'WordPress' == $name;
+		return $this->get_default_from_name() == $name;
+
+	}
+
+	/**
+	 * Get Default From Name
+	 *
+	 * Get the default name assigned by WordPress.
+	 * This is defined in wp_mail() in wp-includes/pluggable.php
+	 *
+	 * @return  string  Default name.
+	 */
+	public function get_default_from_name() {
+
+		return 'WordPress';
 
 	}
 
@@ -201,9 +212,21 @@ class WP_MailFrom_II {
 	 */
 	public function get_default_from() {
 
-		$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+		global $wp_version;
 
-		if ( substr( $sitename, 0, 4 ) == 'www.' ) {
+		/**
+		 * New method of getting sitename in WordPress 5.5+
+		 *
+		 * @see  https://core.trac.wordpress.org/ticket/25239#comment:114
+		 * @see  https://core.trac.wordpress.org/changeset/48601
+		 */
+		if ( version_compare( $wp_version, '5.5' ) >= 0 ) {
+			$sitename = wp_parse_url( network_home_url(), PHP_URL_HOST );
+		} else {
+			$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+		}
+
+		if ( 'www.' === substr( $sitename, 0, 4 ) ) {
 			$sitename = substr( $sitename, 4 );
 		}
 
