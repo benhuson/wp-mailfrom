@@ -195,7 +195,9 @@ class WP_MailFrom_II_Admin {
 	 */
 	public function wp_mailfrom_ii_name_field() {
 
-		echo '<input name="wp_mailfrom_ii_name" type="text" id="wp_mailfrom_ii_name" value="' . esc_attr( get_option( 'wp_mailfrom_ii_name', '' ) ) . '" class="regular-text" />';
+		$wp_mailfrom_ii = \WP_MailFrom_II::get_instance();
+
+		echo '<input name="wp_mailfrom_ii_name" type="text" id="wp_mailfrom_ii_name" value="' . esc_attr( get_option( 'wp_mailfrom_ii_name', '' ) ) . '" class="regular-text" placeholder="' . esc_attr( $wp_mailfrom_ii->get_default_from_name() ) . '" />';
 
 	}
 
@@ -206,7 +208,9 @@ class WP_MailFrom_II_Admin {
 	 */
 	public function wp_mailfrom_ii_email_field() {
 
-		echo '<input name="wp_mailfrom_ii_email" type="text" id="wp_mailfrom_ii_email" value="' . esc_attr( get_option( 'wp_mailfrom_ii_email', '' ) ) . '" class="regular-text" />';
+		$wp_mailfrom_ii = \WP_MailFrom_II::get_instance();
+
+		echo '<input name="wp_mailfrom_ii_email" type="text" id="wp_mailfrom_ii_email" value="' . esc_attr( get_option( 'wp_mailfrom_ii_email', '' ) ) . '" class="regular-text" placeholder="' . esc_attr( $wp_mailfrom_ii->get_default_from() ) . '" />';
 
 	}
 

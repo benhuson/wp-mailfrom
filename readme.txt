@@ -68,6 +68,7 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 == Changelog ==
 
 = Unreleased =
+* Add default values as placeholders in admin fields.
 * New method of getting sitename in WordPress 5.5+
 
 = 1.2 =

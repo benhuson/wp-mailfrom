@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+- Add default values as placeholders in admin fields.
+
 ### Changed
 - New method of getting sitename in WordPress 5.5+
 

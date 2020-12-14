@@ -155,9 +155,6 @@ class WP_MailFrom_II {
 	/**
 	 * Is Default From Name
 	 *
-	 * Checks to see if the name is the default name assigned by WordPress.
-	 * This is defined in wp_mail() in wp-includes/pluggable.php
-	 *
 	 * @since   1.1
 	 *
 	 * @param   string   $name  Name to check.
@@ -165,7 +162,21 @@ class WP_MailFrom_II {
 	 */
 	public function is_default_from_name( $name ) {
 
-		return 'WordPress' == $name;
+		return $this->get_default_from_name() == $name;
+
+	}
+
+	/**
+	 * Get Default From Name
+	 *
+	 * Get the default name assigned by WordPress.
+	 * This is defined in wp_mail() in wp-includes/pluggable.php
+	 *
+	 * @return  string  Default name.
+	 */
+	public function get_default_from_name() {
+
+		return 'WordPress';
 
 	}
 
