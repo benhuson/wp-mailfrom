@@ -172,6 +172,8 @@ class WP_MailFrom_II {
 	 * Get the default name assigned by WordPress.
 	 * This is defined in wp_mail() in wp-includes/pluggable.php
 	 *
+	 * @since   2.0
+	 *
 	 * @return  string  Default name.
 	 */
 	public function get_default_from_name() {
