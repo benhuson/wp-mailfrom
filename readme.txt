@@ -3,8 +3,8 @@ Contributors: husobj
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DMFEA5C6ABCL
 Tags: mail from, from email, email from, from address, mail, email, smtp, from address, email address, from header
 Requires at least: 4.3
-Tested up to: 5.4.4
-Stable tag: 1.2
+Tested up to: 5.6
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,7 +67,7 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 
 == Changelog ==
 
-= Unreleased =
+= 2.0 =
 * Add default values as placeholders in admin fields.
 * New method of getting sitename in WordPress 5.5+
 

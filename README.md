@@ -55,6 +55,9 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 Upgrade Notice
 --------------
 
+### 2.0
+Add default values as placeholders in admin fields and new method of getting sitename in WordPress 5.5+
+
 ### 1.2
 Makes admin field labels clickable and removes deprecated `screen_icon()`.
 
